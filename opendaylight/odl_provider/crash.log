@@ -1,0 +1,939 @@
+2017/06/01 12:12:46 [INFO] Terraform version: 0.9.7 dev 893b2f74a504ab13798ebd8b5ae7e4c02e9cc16d+CHANGES
+2017/06/01 12:12:46 [INFO] Go runtime version: go1.8
+2017/06/01 12:12:46 [INFO] CLI args: []string{"/home/ak/go_work/bin/terraform", "apply"}
+2017/06/01 12:12:46 [DEBUG] Detected home directory from env var: /home/ak
+2017/06/01 12:12:46 [DEBUG] Detected home directory from env var: /home/ak
+2017/06/01 12:12:46 [DEBUG] Attempting to open CLI config file: /home/ak/.terraformrc
+2017/06/01 12:12:46 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2017/06/01 12:12:46 [INFO] CLI command args: []string{"apply"}
+2017/06/01 12:12:46 [DEBUG] command: loading backend config file: /home/ak/go_work/src/github.com/hashicorp/terraform/builtin/providers/odl
+2017/06/01 12:12:46 [DEBUG] command: no data state file found for backend config
+2017/06/01 12:12:46 [DEBUG] New state was assigned lineage "ef40f315-e9b4-4a82-a353-d89520ede80f"
+2017/06/01 12:12:46 [INFO] command: backend initialized: <nil>
+2017/06/01 12:12:46 [INFO] command: backend <nil> is not enhanced, wrapping in local
+2017/06/01 12:12:46 [INFO] backend/local: starting Apply operation
+2017/06/01 12:12:46 [TRACE] Preserving existing state lineage "78c48a44-e52a-4e57-9b1d-f693c859a1b1"
+2017/06/01 12:12:46 [TRACE] Preserving existing state lineage "78c48a44-e52a-4e57-9b1d-f693c859a1b1"
+2017/06/01 12:12:46 [INFO] terraform: building graph: GraphTypeInput
+2017/06/01 12:12:46 [TRACE] ConfigTransformer: Starting for path: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OutputTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+2017/06/01 12:12:46 [TRACE] AttachResourceConfigTransformer: Beginning...
+2017/06/01 12:12:46 [TRACE] AttachResourceConfigTransformer: Attach resource config request: odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"foo", Type:"odl_networkTopology", RawCount:(*config.RawConfig)(0xc42021ba40), RawConfig:(*config.RawConfig)(0xc42021b560), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+2017/06/01 12:12:46 [DEBUG] Resource state not found for "odl_networkTopology.foo": odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachStateTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootVariableTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.DisableProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Attach provider request: []string{} odl
+2017/06/01 12:12:46 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"odl", Alias:"", RawConfig:(*config.RawConfig)(0xc42021b0e0)}
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachProviderConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "odl_networkTopology.foo" references: []
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "provider.odl" references: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ReferenceTransformer:
+
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TargetsTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CloseProviderTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+root - terraform.graphNodeRoot
+  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.odl (close) - *terraform.graphNodeCloseProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+odl_networkTopology.foo - *terraform.NodeAbstractResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeAbstractResource
+root - terraform.graphNodeRoot
+  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.odl (close) - *terraform.graphNodeCloseProvider
+2017/06/01 12:12:46 [DEBUG] Starting graph walk: walkInput
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "root"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "provider.odl"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "odl_networkTopology.foo" waiting on "provider.odl"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "provider.odl (close)" waiting on "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "root" waiting on "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "odl_networkTopology.foo", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "provider.odl (close)", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "root", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "provider.odl"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl': evaluating
+2017/06/01 12:12:46 [TRACE] [walkInput] Entering eval tree: provider.odl
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInitProvider
+2017/06/01 12:12:46 [DEBUG] plugin: starting plugin: /home/ak/go_work/bin/terraform []string{"/home/ak/go_work/bin/terraform", "internal-plugin", "provider", "odl"}
+2017/06/01 12:12:46 [DEBUG] plugin: waiting for RPC address for: /home/ak/go_work/bin/terraform
+2017/06/01 12:12:46 [DEBUG] Detected home directory from env var: /home/ak
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 2017/06/01 12:12:46 [INFO] Terraform version: 0.9.7 dev 893b2f74a504ab13798ebd8b5ae7e4c02e9cc16d+CHANGES
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 2017/06/01 12:12:46 [INFO] Go runtime version: go1.8
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 2017/06/01 12:12:46 [INFO] CLI args: []string{"/home/ak/go_work/bin/terraform", "internal-plugin", "provider", "odl"}
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 2017/06/01 12:12:46 [DEBUG] Detected home directory from env var: /home/ak
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 2017/06/01 12:12:46 [DEBUG] Detected home directory from env var: /home/ak
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 2017/06/01 12:12:46 [DEBUG] Attempting to open CLI config file: /home/ak/.terraformrc
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 2017/06/01 12:12:46 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 2017/06/01 12:12:46 [INFO] CLI command args: []string{"internal-plugin", "provider", "odl"}
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: odl-provider (internal) 2017/06/01 12:12:46 [INFO] Starting provider plugin odl
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: odl-provider (internal) 2017/06/01 12:12:46 [DEBUG] plugin: plugin address: unix /tmp/plugin170584900
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: odl-provider (internal) 2017/06/01 12:12:46 [DEBUG] Detected home directory from env var: /home/ak
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalOpFilter
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalGetProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInterpolate
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalBuildProviderConfig
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInputProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [TRACE] [walkInput] Exiting eval tree: provider.odl
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': walking
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.meta.count-boundary (count boundary fixup)': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.meta.count-boundary (count boundary fixup)': evaluating
+2017/06/01 12:12:46 [TRACE] [walkInput] Entering eval tree: meta.count-boundary (count boundary fixup)
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCountFixZeroOneBoundaryGlobal
+2017/06/01 12:12:46 [TRACE] [walkInput] Exiting eval tree: meta.count-boundary (count boundary fixup)
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl (close)': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl (close)': evaluating
+2017/06/01 12:12:46 [TRACE] [walkInput] Entering eval tree: provider.odl (close)
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCloseProvider
+2017/06/01 12:12:46 [TRACE] [walkInput] Exiting eval tree: provider.odl (close)
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "root"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.root': walking
+2017/06/01 12:12:46 [INFO] terraform: building graph: GraphTypeValidate
+2017/06/01 12:12:46 [TRACE] ConfigTransformer: Starting for path: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OutputTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+2017/06/01 12:12:46 [TRACE] AttachResourceConfigTransformer: Beginning...
+2017/06/01 12:12:46 [TRACE] AttachResourceConfigTransformer: Attach resource config request: odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"foo", Type:"odl_networkTopology", RawCount:(*config.RawConfig)(0xc42021ba40), RawConfig:(*config.RawConfig)(0xc42021b560), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+2017/06/01 12:12:46 [DEBUG] Resource state not found for "odl_networkTopology.foo": odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachStateTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootVariableTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.DisableProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Attach provider request: []string{} odl
+2017/06/01 12:12:46 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"odl", Alias:"", RawConfig:(*config.RawConfig)(0xc42021b0e0)}
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachProviderConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.graphTransformerMulti:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "odl_networkTopology.foo" references: []
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "provider.odl" references: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ReferenceTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TargetsTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CloseProviderTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+root - terraform.graphNodeRoot
+  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.odl (close) - *terraform.graphNodeCloseProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+odl_networkTopology.foo - *terraform.NodeValidatableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeValidatableResource
+root - terraform.graphNodeRoot
+  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.odl (close) - *terraform.graphNodeCloseProvider
+2017/06/01 12:12:46 [DEBUG] Starting graph walk: walkValidate
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "root"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "provider.odl"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "provider.odl (close)" waiting on "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "root" waiting on "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "odl_networkTopology.foo" waiting on "provider.odl"
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "provider.odl (close)", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "root", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "odl_networkTopology.foo", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "provider.odl"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl': evaluating
+2017/06/01 12:12:46 [TRACE] [walkValidate] Entering eval tree: provider.odl
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInitProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalOpFilter
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalGetProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInterpolate
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalBuildProviderConfig
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalValidateProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSetProviderConfig
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [TRACE] [walkValidate] Exiting eval tree: provider.odl
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': evaluating
+2017/06/01 12:12:46 [TRACE] [walkValidate] Entering eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInterpolate
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalIf
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalValidateCount
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCountFixZeroOneBoundary
+2017/06/01 12:12:46 [TRACE] [walkValidate] Exiting eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': expanding/walking dynamic subgraph
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ResourceCountTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResourceInstance
+2017/06/01 12:12:46 [DEBUG] Resource state not found for "odl_networkTopology.foo": odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachStateTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResourceInstance
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TargetsTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResourceInstance
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "odl_networkTopology.foo" references: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ReferenceTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResourceInstance
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootTransformer:
+
+odl_networkTopology.foo - *terraform.NodeValidatableResourceInstance
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': evaluating
+2017/06/01 12:12:46 [TRACE] [walkValidate] Entering eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalValidateResourceSelfRef
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalGetProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInterpolate
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalValidateResource
+2017/06/01 12:12:46 [TRACE] [walkValidate] Exiting eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.meta.count-boundary (count boundary fixup)': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.meta.count-boundary (count boundary fixup)': evaluating
+2017/06/01 12:12:46 [TRACE] [walkValidate] Entering eval tree: meta.count-boundary (count boundary fixup)
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCountFixZeroOneBoundaryGlobal
+2017/06/01 12:12:46 [TRACE] [walkValidate] Exiting eval tree: meta.count-boundary (count boundary fixup)
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl (close)': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl (close)': evaluating
+2017/06/01 12:12:46 [TRACE] [walkValidate] Entering eval tree: provider.odl (close)
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCloseProvider
+2017/06/01 12:12:46 [TRACE] [walkValidate] Exiting eval tree: provider.odl (close)
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "root"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.root': walking
+2017/06/01 12:12:46 [INFO] backend/local: apply calling Refresh
+2017/06/01 12:12:46 [INFO] terraform: building graph: GraphTypeRefresh
+2017/06/01 12:12:46 [TRACE] No managed resources in state during refresh, skipping managed resource transformer
+2017/06/01 12:12:46 [TRACE] ConfigTransformer: Starting for path: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ConfigTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachStateTransformer:
+
+2017/06/01 12:12:46 [TRACE] AttachResourceConfigTransformer: Beginning...
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootVariableTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ProviderTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.DisableProviderTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachProviderConfigTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OutputTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ReferenceTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TargetsTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CloseProviderTransformer:
+
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootTransformer:
+
+root - terraform.graphNodeRoot
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+
+root - terraform.graphNodeRoot
+2017/06/01 12:12:46 [DEBUG] Starting graph walk: walkRefresh
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "root"
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "root"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.root': walking
+2017/06/01 12:12:46 [INFO] backend/local: apply calling Plan
+2017/06/01 12:12:46 [INFO] terraform: building graph: GraphTypePlan
+2017/06/01 12:12:46 [TRACE] ConfigTransformer: Starting for path: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OutputTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+2017/06/01 12:12:46 [TRACE] AttachResourceConfigTransformer: Beginning...
+2017/06/01 12:12:46 [TRACE] AttachResourceConfigTransformer: Attach resource config request: odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"foo", Type:"odl_networkTopology", RawCount:(*config.RawConfig)(0xc42021ba40), RawConfig:(*config.RawConfig)(0xc42021b560), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+2017/06/01 12:12:46 [DEBUG] Resource state not found for "odl_networkTopology.foo": odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachStateTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootVariableTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.DisableProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Attach provider request: []string{} odl
+2017/06/01 12:12:46 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"odl", Alias:"", RawConfig:(*config.RawConfig)(0xc42021b0e0)}
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachProviderConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "provider.odl" references: []
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "odl_networkTopology.foo" references: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ReferenceTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TargetsTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CloseProviderTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+root - terraform.graphNodeRoot
+  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.odl (close) - *terraform.graphNodeCloseProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+odl_networkTopology.foo - *terraform.NodePlannableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodePlannableResource
+root - terraform.graphNodeRoot
+  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.odl (close) - *terraform.graphNodeCloseProvider
+2017/06/01 12:12:46 [DEBUG] Starting graph walk: walkPlan
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "root"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "provider.odl"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "provider.odl (close)" waiting on "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "root" waiting on "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "odl_networkTopology.foo" waiting on "provider.odl"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "provider.odl (close)", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "root", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "odl_networkTopology.foo", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "provider.odl"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl': evaluating
+2017/06/01 12:12:46 [TRACE] [walkPlan] Entering eval tree: provider.odl
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInitProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalOpFilter
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalGetProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInterpolate
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalBuildProviderConfig
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSetProviderConfig
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalOpFilter
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalConfigProvider
+2017/06/01 12:12:46 [TRACE] [walkPlan] Exiting eval tree: provider.odl
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': evaluating
+2017/06/01 12:12:46 [TRACE] [walkPlan] Entering eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInterpolate
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCountCheckComputed
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalIf
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCountFixZeroOneBoundary
+2017/06/01 12:12:46 [TRACE] [walkPlan] Exiting eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': expanding/walking dynamic subgraph
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ResourceCountTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResourceInstance
+2017/06/01 12:12:46 [TRACE] OrphanResourceCount: Starting...
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OrphanResourceCountTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResourceInstance
+2017/06/01 12:12:46 [DEBUG] Resource state not found for "odl_networkTopology.foo": odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachStateTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResourceInstance
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TargetsTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResourceInstance
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "odl_networkTopology.foo" references: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ReferenceTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResourceInstance
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootTransformer:
+
+odl_networkTopology.foo - *terraform.NodePlannableResourceInstance
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': evaluating
+2017/06/01 12:12:46 [TRACE] [walkPlan] Entering eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInterpolate
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalGetProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalValidateResource
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalReadState
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalDiff
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCheckPreventDestroy
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalWriteState
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalWriteDiff
+2017/06/01 12:12:46 [TRACE] [walkPlan] Exiting eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl (close)': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl (close)': evaluating
+2017/06/01 12:12:46 [TRACE] [walkPlan] Entering eval tree: provider.odl (close)
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCloseProvider
+2017/06/01 12:12:46 [TRACE] [walkPlan] Exiting eval tree: provider.odl (close)
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.meta.count-boundary (count boundary fixup)': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.meta.count-boundary (count boundary fixup)': evaluating
+2017/06/01 12:12:46 [TRACE] [walkPlan] Entering eval tree: meta.count-boundary (count boundary fixup)
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCountFixZeroOneBoundaryGlobal
+2017/06/01 12:12:46 [TRACE] [walkPlan] Exiting eval tree: meta.count-boundary (count boundary fixup)
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "root"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.root': walking
+2017/06/01 12:12:46 [INFO] terraform: building graph: GraphTypeApply
+2017/06/01 12:12:46 [TRACE] DiffTransformer: starting
+2017/06/01 12:12:46 [TRACE] DiffTransformer: Module: CREATE: odl_networkTopology.foo
+  ip:       "" => "192.168.56.102" (forces new resource)
+  password: "" => "admin" (forces new resource)
+  port:     "" => "8181" (forces new resource)
+  resturl:  "" => "config/network-topology:network-topology/" (forces new resource)
+  user:     "" => "admin" (forces new resource)
+2017/06/01 12:12:46 [TRACE] DiffTransformer: Resource "odl_networkTopology.foo": *terraform.InstanceDiff{mu:sync.Mutex{state:0, sema:0x0}, Attributes:map[string]*terraform.ResourceAttrDiff{"port":*terraform.ResourceAttrDiff{Old:"", New:"8181", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:true, Sensitive:false, Type:0x0}, "user":*terraform.ResourceAttrDiff{Old:"", New:"admin", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:true, Sensitive:false, Type:0x0}, "password":*terraform.ResourceAttrDiff{Old:"", New:"admin", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:true, Sensitive:false, Type:0x0}, "resturl":*terraform.ResourceAttrDiff{Old:"", New:"config/network-topology:network-topology/", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:true, Sensitive:false, Type:0x0}, "ip":*terraform.ResourceAttrDiff{Old:"", New:"192.168.56.102", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:true, Sensitive:false, Type:0x0}, "id":*terraform.ResourceAttrDiff{Old:"", New:"", NewComputed:true, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:true, Sensitive:false, Type:0x2}}, Destroy:false, DestroyDeposed:false, DestroyTainted:false, Meta:map[string]interface {}(nil)}
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.DiffTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OrphanOutputTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+2017/06/01 12:12:46 [TRACE] AttachResourceConfigTransformer: Beginning...
+2017/06/01 12:12:46 [TRACE] AttachResourceConfigTransformer: Attach resource config request: odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"foo", Type:"odl_networkTopology", RawCount:(*config.RawConfig)(0xc42021ba40), RawConfig:(*config.RawConfig)(0xc42021b560), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+2017/06/01 12:12:46 [DEBUG] Resource state not found for "odl_networkTopology.foo": odl_networkTopology.foo
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachStateTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.DisableProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Attach provider request: []string{} odl
+2017/06/01 12:12:46 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"odl", Alias:"", RawConfig:(*config.RawConfig)(0xc42021b0e0)}
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.AttachProviderConfigTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] DestroyEdgeTransformer: Beginning destroy edge transformation...
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.DestroyEdgeTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] CBDEdgeTransformer: Beginning CBD transformation...
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CBDEdgeTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.MissingProvisionerTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ProvisionerTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootVariableTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.OutputTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "odl_networkTopology.foo" references: []
+2017/06/01 12:12:46 [DEBUG] ReferenceTransformer: "provider.odl" references: []
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.ReferenceTransformer:
+
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TargetsTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CloseProviderTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.RootTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+root - terraform.graphNodeRoot
+  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.odl (close) - *terraform.graphNodeCloseProvider
+2017/06/01 12:12:46 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+odl_networkTopology.foo - *terraform.NodeApplyableResource
+  provider.odl - *terraform.NodeApplyableProvider
+provider.odl - *terraform.NodeApplyableProvider
+provider.odl (close) - *terraform.graphNodeCloseProvider
+  odl_networkTopology.foo - *terraform.NodeApplyableResource
+root - terraform.graphNodeRoot
+  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.odl (close) - *terraform.graphNodeCloseProvider
+2017/06/01 12:12:46 [DEBUG] Starting graph walk: walkApply
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "root"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "provider.odl"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added new vertex: "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "root" waiting on "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "odl_networkTopology.foo" waiting on "provider.odl"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: added edge: "provider.odl (close)" waiting on "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "root", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "odl_networkTopology.foo", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: dependencies changed for "provider.odl (close)", sending new deps
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "provider.odl"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.provider.odl': evaluating
+2017/06/01 12:12:46 [TRACE] [walkApply] Entering eval tree: provider.odl
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInitProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalOpFilter
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalGetProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInterpolate
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalBuildProviderConfig
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSetProviderConfig
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalOpFilter
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalConfigProvider
+2017/06/01 12:12:46 [TRACE] [walkApply] Exiting eval tree: provider.odl
+2017/06/01 12:12:46 [DEBUG] dag/walk: walking "odl_networkTopology.foo"
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': walking
+2017/06/01 12:12:46 [DEBUG] vertex 'root.odl_networkTopology.foo': evaluating
+2017/06/01 12:12:46 [TRACE] [walkApply] Entering eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalSequence
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInstanceInfo
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalReadDiff
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalIf
+2017/06/01 12:12:46 [DEBUG] root: eval: terraform.EvalNoop
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalIf
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalInterpolate
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalGetProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalReadState
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalValidateResource
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalDiff
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalReadDiff
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalCompareDiff
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalGetProvider
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalReadState
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalApplyPre
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalApply
+2017/06/01 12:12:46 [DEBUG] apply: odl_networkTopology.foo: executing Apply
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: odl-provider (internal) 2017/06/01 12:12:46 [DEBUG] No meta timeoutkey found in Apply()
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: panic: runtime error: invalid memory address or nil pointer dereference
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: [signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0xac86d8]
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: goroutine 46 [running]:
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: github.com/hashicorp/terraform/helper/schema.(*Resource).Apply(0xc42001b7a0, 0xc42022e2d0, 0xc420301c20, 0x0, 0x0, 0x1, 0x28, 0xc4203da780)
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 	/home/ak/go_work/src/github.com/hashicorp/terraform/helper/schema/resource.go:186 +0x488
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: github.com/hashicorp/terraform/helper/schema.(*Provider).Apply(0xc4202bef50, 0xc42022e280, 0xc42022e2d0, 0xc420301c20, 0x7efc7814a000, 0x0, 0x0)
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 	/home/ak/go_work/src/github.com/hashicorp/terraform/helper/schema/provider.go:242 +0x9b
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: github.com/hashicorp/terraform/plugin.(*ResourceProviderServer).Apply(0xc4204ce260, 0xc4203011a0, 0xc4203e5cd0, 0x0, 0x0)
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 	/home/ak/go_work/src/github.com/hashicorp/terraform/plugin/resource_provider.go:488 +0x57
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: reflect.Value.call(0xc420171ec0, 0xc42000cfb8, 0x13, 0x52298f3, 0x4, 0xc42003ef20, 0x3, 0x3, 0x53d0cf0, 0xc4200246e8, ...)
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 	/usr/local/go/src/reflect/value.go:434 +0x91f
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: reflect.Value.Call(0xc420171ec0, 0xc42000cfb8, 0x13, 0xc420024720, 0x3, 0x3, 0xc42002470c, 0x180001, 0x400000000)
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 	/usr/local/go/src/reflect/value.go:302 +0xa4
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: net/rpc.(*service).call(0xc420321140, 0xc420321100, 0xc4202bd498, 0xc42031fd00, 0xc4204cf8c0, 0x4378660, 0xc4203011a0, 0x16, 0x43786a0, 0xc4203e5cd0, ...)
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 	/usr/local/go/src/net/rpc/server.go:387 +0x144
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: created by net/rpc.(*Server).ServeCodec
+2017/06/01 12:12:46 [DEBUG] plugin: terraform: 	/usr/local/go/src/net/rpc/server.go:481 +0x404
+2017/06/01 12:12:46 [DEBUG] plugin: /home/ak/go_work/bin/terraform: plugin process exited
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalWriteState
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalApplyProvisioners
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalIf
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalWriteState
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalWriteDiff
+2017/06/01 12:12:46 [DEBUG] root: eval: *terraform.EvalApplyPost
+2017/06/01 12:12:46 [ERROR] root: eval: *terraform.EvalApplyPost, err: 1 error(s) occurred:
+
+* odl_networkTopology.foo: unexpected EOF
+2017/06/01 12:12:46 [ERROR] root: eval: *terraform.EvalSequence, err: 1 error(s) occurred:
+
+* odl_networkTopology.foo: unexpected EOF
+2017/06/01 12:12:46 [TRACE] [walkApply] Exiting eval tree: odl_networkTopology.foo
+2017/06/01 12:12:46 [DEBUG] dag/walk: upstream errored, not walking "meta.count-boundary (count boundary fixup)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: upstream errored, not walking "provider.odl (close)"
+2017/06/01 12:12:46 [DEBUG] dag/walk: upstream errored, not walking "root"
+2017/06/01 12:12:46 [TRACE] Preserving existing state lineage "78c48a44-e52a-4e57-9b1d-f693c859a1b1"
+2017/06/01 12:12:46 [TRACE] Preserving existing state lineage "78c48a44-e52a-4e57-9b1d-f693c859a1b1"
+2017/06/01 12:12:46 [DEBUG] plugin: waiting for all plugin processes to complete...
+2017/06/01 12:12:46 [WARN] plugin: error closing client during Kill: connection is shut down
