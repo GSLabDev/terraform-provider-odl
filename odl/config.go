@@ -17,7 +17,7 @@ type Config struct {
 	URL      string
 }
 
-//Connection ... Create a new connection with winrm to Powershell.
+//checkConnection ... checkConnection with server.
 func (c *Config) checkConnection() (*Config, error) {
 	c.URL = "http://" + c.ServerIP + ":" + string(c.Port) + "/"
 	_, err := url.Parse(c.URL)
