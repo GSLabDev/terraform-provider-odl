@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"strconv"
 )
 
 // Config ... ODL configuration details
@@ -19,7 +20,7 @@ type Config struct {
 
 //checkConnection ... checkConnection with server.
 func (c *Config) checkConnection() (*Config, error) {
-	c.URL = "http://" + c.ServerIP + ":" + string(c.Port) + "/"
+	c.URL = "http://" + c.ServerIP + ":" + strconv.Itoa(c.Port) + "/"
 	log.Printf("[INFO] Checking url")
 	_, err := url.Parse(c.URL)
 	if err != nil {
