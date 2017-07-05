@@ -23,6 +23,17 @@ type VtnList struct {
 				VbridgeConfig struct {
 					AgeInterval int `json:"age-interval"`
 				} `json:"vbridge-config"`
+				VInterface []struct {
+					Name             string `json:"name"`
+					VInterfaceConfig struct {
+						Description string `json:"description"`
+						Enabled     bool   `json:"enabled"`
+					} `json:"vinterface-config"`
+					VInterfaceStatus struct {
+						EntityState string `json:"entity-state"`
+						State       string `json:"state"`
+					} `json:"vinterface-status"`
+				} `json:"vinterface"`
 			} `json:"vbridge"`
 			VtenantConfig struct {
 				HardTimeout int `json:"hard-timeout"`
@@ -110,6 +121,38 @@ func CheckResponseVbrExists(response *http.Response, tenantName, bridgeName stri
 					for j := range data.Vtns.Vtn[i].Vbridge {
 						if data.Vtns.Vtn[i].Vbridge[j].Name == bridgeName {
 							return true, nil
+						}
+					}
+				}
+				return false, nil
+			}
+		}
+	}
+	return false, nil
+}
+
+//CheckResponseVInterfaceExists ... checks response if vInterface exists
+func CheckResponseVInterfaceExists(response *http.Response, tenantName, bridgeName, interfaceName string) (bool, error) {
+	respString, err := getResponseAsString(response)
+	data := &VtnList{}
+	err = json.Unmarshal([]byte(respString), data)
+	if err != nil {
+		return false, err
+	}
+	if data.Vtns.Vtn != nil {
+		for i := range data.Vtns.Vtn {
+			if data.Vtns.Vtn[i].Name == tenantName {
+				if data.Vtns.Vtn[i].Vbridge != nil {
+					for j := range data.Vtns.Vtn[i].Vbridge {
+						if data.Vtns.Vtn[i].Vbridge[j].Name == bridgeName {
+							if data.Vtns.Vtn[i].Vbridge[j].VInterface != nil {
+								for k := range data.Vtns.Vtn[i].Vbridge[j].VInterface {
+									if data.Vtns.Vtn[i].Vbridge[j].VInterface[k].Name == interfaceName {
+										return true, nil
+									}
+								}
+							}
+							return false, nil
 						}
 					}
 				}

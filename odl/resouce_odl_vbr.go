@@ -144,7 +144,7 @@ func resourceVbrDelete(d *schema.ResourceData, meta interface{}) error {
 			return fmt.Errorf("[ERROR] While creating vbr %s", errorOutput.Errors.Error[0].Message)
 		}
 		if err != nil {
-			return fmt.Errorf("[ERROR] Whlie creating vbr %s", err.Error())
+			return fmt.Errorf("[ERROR] Whlie destroying vbr %s", err.Error())
 		}
 	}
 

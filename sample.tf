@@ -1,16 +1,15 @@
-provider "odl" {
-	user = "admin"
-  	password = "admin"
-  	ip = "192.168.56.102"
-  	port = "8181"
-
-    
+provider "odl"{
+        server_ip = "192.168.56.106"
+        port = 8080
+        user_name = "admin"
+        user_password = "admin"
 }
 
-resource "odl_networkTopology" "foo"{
-  user = "admin"
-  password = "admin"
-  ip = "192.168.56.102"
-  port = "8181"
-  resturl = "/config/network-topology:network-topology/"
+resource "odl_vtn" "firstVtn"{
+        tenant_name = "vtn5"
+}
+
+resource "odl_vbr" "firstVbr"{
+        tenant_name = "${odl_vtn.firstVtn.tenant_name}"
+        bridge_name = "vbr6"
 }

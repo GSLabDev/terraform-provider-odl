@@ -140,7 +140,7 @@ func resourceVtnDelete(d *schema.ResourceData, meta interface{}) error {
 			return fmt.Errorf("[ERROR] While creating vtn %s", errorOutput.Errors.Error[0].Message)
 		}
 		if err != nil {
-			return fmt.Errorf("[ERROR] Whlie creating vtn %s", err.Error())
+			return fmt.Errorf("[ERROR] Whlie destroying vtn %s", err.Error())
 		}
 	}
 
