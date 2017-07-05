@@ -20,11 +20,13 @@ type Config struct {
 //checkConnection ... checkConnection with server.
 func (c *Config) checkConnection() (*Config, error) {
 	c.URL = "http://" + c.ServerIP + ":" + string(c.Port) + "/"
+	log.Printf("[INFO] Checking url")
 	_, err := url.Parse(c.URL)
 	if err != nil {
 		log.Println("[Error] URL is not in correct format")
 		return nil, err
 	}
+	log.Printf("[INFO] Creating request")
 	request, err := http.NewRequest("GET", c.URL+"auth/v1/users", nil)
 	if err != nil {
 		log.Printf("[ERROR] Error in creating http Request %s", err)
@@ -38,6 +40,7 @@ func (c *Config) checkConnection() (*Config, error) {
 	request.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{Transport: tr}
+	log.Printf("[INFO] Checking users")
 	resp, err := client.Do(request)
 	if err != nil {
 		log.Println(" [ERROR] Connecting to server ", err)
