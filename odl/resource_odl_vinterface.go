@@ -136,7 +136,7 @@ func resourceVInterfaceDelete(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*Config)
 	tenantName := d.Get("tenant_name").(string)
 	bridgeName := d.Get("bridge_name").(string)
-	interfaceName := d.Get("interaface_name").(string)
+	interfaceName := d.Get("interface_name").(string)
 
 	var body map[string]interface{}
 	var input map[string]string
