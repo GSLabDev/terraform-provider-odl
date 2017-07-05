@@ -17,7 +17,7 @@ func Provider() terraform.ResourceProvider {
 			},
 
 			"port": {
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				Required:    true,
 				Description: "odl server port",
 				DefaultFunc: schema.EnvDefaultFunc("ODL_SERVER_PORT", nil),
