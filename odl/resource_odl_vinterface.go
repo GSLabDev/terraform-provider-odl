@@ -109,7 +109,7 @@ func resourceVInterfaceRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*Config)
 	tenantName := d.Get("tenant_name").(string)
 	bridgeName := d.Get("bridge_name").(string)
-	interfaceName := d.Get("interaface_name").(string)
+	interfaceName := d.Get("interface_name").(string)
 
 	log.Println("[INFO] Read Interface with name " + interfaceName)
 	response, err := config.GetRequest("restconf/operational/vtn:vtns")
