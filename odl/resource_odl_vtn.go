@@ -45,7 +45,7 @@ func resourceOdlVtn() *schema.Resource {
 }
 func resourceVtnAdd(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(Config)
-	tenantName := d.Get("tennant_name").(string)
+	tenantName := d.Get("tenant_name").(string)
 
 	var body map[string]interface{}
 	var input map[string]string
@@ -90,7 +90,7 @@ func resourceVtnAdd(d *schema.ResourceData, meta interface{}) error {
 }
 func resourceVtnRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(Config)
-	tenantName := d.Get("tennant_name").(string)
+	tenantName := d.Get("tenant_name").(string)
 	response, err := config.GetRequest("restconf/operational/vtn:vtns")
 	if err != nil {
 		log.Printf("[ERROR] POST Request failed")
@@ -112,7 +112,7 @@ func resourceVtnDelete(d *schema.ResourceData, meta interface{}) error {
 		return fmt.Errorf("[ERROR] vtn does not exists")
 	}
 	config := meta.(Config)
-	tenantName := d.Get("tennant_name").(string)
+	tenantName := d.Get("tenant_name").(string)
 
 	var body map[string]interface{}
 	var input map[string]string
