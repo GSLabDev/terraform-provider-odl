@@ -75,7 +75,7 @@ func resourceVbrAdd(d *schema.ResourceData, meta interface{}) error {
 	}
 	isCreated, output, errorOutput, err := Status(response)
 	if isCreated {
-		d.SetId(tenantName + output.Output.Status)
+		d.SetId(tenantName + bridgeName + output.Output.Status)
 	} else {
 		if errorOutput != nil {
 			log.Printf("[ERROR] While creating vbr %s", errorOutput.Errors.Error[0].Message)
