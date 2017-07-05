@@ -17,6 +17,7 @@ func (c *Config) PostRequest(requestPath string, body map[string]interface{}) (*
 		var jsonStr = []byte(buff)
 		bodyBuffer = bytes.NewBuffer(jsonStr)
 	}
+	log.Println("[INFO] Posting data on URL " + c.URL + requestPath)
 	request, err := http.NewRequest("POST", c.URL+requestPath, bodyBuffer)
 	if err != nil {
 		log.Printf("[ERROR] Error in creating http Request %s", err)
@@ -27,6 +28,7 @@ func (c *Config) PostRequest(requestPath string, body map[string]interface{}) (*
 
 // GetRequest ... get Request to odl
 func (c *Config) GetRequest(requestPath string) (*http.Response, error) {
+	log.Println("[INFO] Getting data on URL " + c.URL + requestPath)
 	request, err := http.NewRequest("GET", c.URL+requestPath, nil)
 	if err != nil {
 		log.Printf("[ERROR] Error in creating http Request %s", err)
