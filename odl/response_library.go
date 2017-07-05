@@ -85,9 +85,36 @@ func CheckResponseVtnExists(response *http.Response, name string) (bool, error) 
 	if err != nil {
 		return false, err
 	}
-	for i := range data.Vtns.Vtn {
-		if data.Vtns.Vtn[i].Name == name {
-			return true, nil
+	if data.Vtns.Vtn != nil {
+		for i := range data.Vtns.Vtn {
+			if data.Vtns.Vtn[i].Name == name {
+				return true, nil
+			}
+		}
+	}
+	return false, nil
+}
+
+//CheckResponseVbrExists ... checks response if vtn exists
+func CheckResponseVbrExists(response *http.Response, tenantName, bridgeName string) (bool, error) {
+	respString, err := getResponseAsString(response)
+	data := &VtnList{}
+	err = json.Unmarshal([]byte(respString), data)
+	if err != nil {
+		return false, err
+	}
+	if data.Vtns.Vtn != nil {
+		for i := range data.Vtns.Vtn {
+			if data.Vtns.Vtn[i].Name == tenantName {
+				if data.Vtns.Vtn[i].Vbridge != nil {
+					for j := range data.Vtns.Vtn[i].Vbridge {
+						if data.Vtns.Vtn[i].Vbridge[j].Name == bridgeName {
+							return true, nil
+						}
+					}
+				}
+				return false, nil
+			}
 		}
 	}
 	return false, nil

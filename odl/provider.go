@@ -41,6 +41,7 @@ func Provider() terraform.ResourceProvider {
 
 		ResourcesMap: map[string]*schema.Resource{
 			"odl_vtn": resourceOdlVtn(),
+			"odl_vbr": resourceOdlVbr(),
 		},
 
 		ConfigureFunc: providerConfigure,
