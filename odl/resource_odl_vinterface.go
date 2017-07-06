@@ -20,10 +20,9 @@ func resourceOdlVInterface() *schema.Resource {
 				ForceNew: true,
 			},
 			"enabled": &schema.Schema{
-				Type:         schema.TypeBool,
-				Optional:     true,
-				ForceNew:     true,
-				ValidateFunc: validateOperation,
+				Type:     schema.TypeBool,
+				Optional: true,
+				ForceNew: true,
 			},
 			"operation": &schema.Schema{
 				Type:         schema.TypeString,
