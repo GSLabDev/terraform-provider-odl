@@ -36,10 +36,10 @@ func TestAccVInterface_Basic(t *testing.T) {
 
 func testAccCheckVInterfaceDestroy(s *terraform.State) error {
 
-	rs, ok := s.RootModule().Resources["odl_VInterface.VInterface1"]
+	rs, ok := s.RootModule().Resources["odl_vinterface.vinterface1"]
 
 	if !ok {
-		return fmt.Errorf("Not found: odl_VInterface.VInterface1")
+		return fmt.Errorf("Not found: odl_vinterface.vinterface1")
 	}
 
 	tenantName := rs.Primary.Attributes["tenant_name"]
