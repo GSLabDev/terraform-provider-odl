@@ -10,54 +10,56 @@ import (
 )
 
 func TestAccVbr_Basic(t *testing.T) {
-	tenantName := "vtn1"
-	bridgeName := "vbr1"
+	tenantName := "terraformVtn"
+	bridgeName := "terraformBridge"
+	resourceName := "odl_vbr.firstVbr"
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
 		Providers:    testAccProviders,
-		CheckDestroy: testAccCheckVbrDestroy,
+		CheckDestroy: testAccCheckVbrDestroy(resourceName),
 		Steps: []resource.TestStep{
 			resource.TestStep{
 				Config: testAccCheckVbrConfigBasic,
 				Check: resource.ComposeTestCheckFunc(
-					testAccCheckVbrExists("odl_vbr.vbr1"),
+					testAccCheckVbrExists(resourceName),
 					resource.TestCheckResourceAttr(
-						"odl_vbr.vbr1", "tenant_name", tenantName),
+						resourceName, "tenant_name", tenantName),
 					resource.TestCheckResourceAttr(
-						"odl_vbr.vbr1", "bridge_name", bridgeName),
+						resourceName, "bridge_name", bridgeName),
 				),
 			},
 		},
 	})
 }
 
-func testAccCheckVbrDestroy(s *terraform.State) error {
+func testAccCheckVbrDestroy(n string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[n]
 
-	rs, ok := s.RootModule().Resources["odl_vbr.vbr1"]
+		if !ok {
+			return fmt.Errorf("Not found: " + n)
+		}
 
-	if !ok {
-		return fmt.Errorf("Not found: odl_vbr.vbr1")
-	}
+		tenantName := rs.Primary.Attributes["tenant_name"]
+		bridgeName := rs.Primary.Attributes["bridge_name"]
+		config := testAccProvider.Meta().(*Config)
 
-	tenantName := rs.Primary.Attributes["tenant_name"]
-	bridgeName := rs.Primary.Attributes["bridge_name"]
-	config := testAccProvider.Meta().(*Config)
-
-	response, err := config.GetRequest("restconf/operational/vtn:vtns")
-	if err != nil {
-		log.Printf("[ERROR] POST Request failed")
-		return err
+		response, err := config.GetRequest("restconf/operational/vtn:vtns")
+		if err != nil {
+			log.Printf("[ERROR] POST Request failed")
+			return err
+		}
+		present, err := CheckResponseVbrExists(response, tenantName, bridgeName)
+		if err != nil {
+			log.Println("[ERROR] Vbr Read failed")
+			return fmt.Errorf("[ERROR] Vbr could not be read %v", err)
+		}
+		if present {
+			log.Println("[DEBUG] Vbr with name " + bridgeName + " found")
+			return fmt.Errorf("[ERROR] Vbr with name " + bridgeName + "was found")
+		}
+		return nil
 	}
-	present, err := CheckResponseVbrExists(response, tenantName, bridgeName)
-	if err != nil {
-		log.Println("[ERROR] Vbr Read failed")
-		return fmt.Errorf("[ERROR] Vbr could not be read %v", err)
-	}
-	if present {
-		log.Println("[INFO] Vbr with name " + bridgeName + " found")
-		return fmt.Errorf("[ERROR] Vbr with name " + bridgeName + "was found")
-	}
-	return nil
 }
 
 func testAccCheckVbrExists(n string) resource.TestCheckFunc {
@@ -87,7 +89,7 @@ func testAccCheckVbrExists(n string) resource.TestCheckFunc {
 			return fmt.Errorf("[ERROR] Vbr could not be read %v", err)
 		}
 		if !present {
-			log.Println("[INFO] Vbr with name " + bridgeName + "was not found")
+			log.Println("[DEBUG] Vbr with name " + bridgeName + "was not found")
 			return fmt.Errorf("[ERROR] Vbr with name " + bridgeName + "was not found")
 		}
 		return nil
@@ -95,7 +97,18 @@ func testAccCheckVbrExists(n string) resource.TestCheckFunc {
 }
 
 const testAccCheckVbrConfigBasic = `
-resource "odl_vbr" "vbr1"{
-     	tenant_name = "vtn1"
-		bridge_name = "vbr1"
+resource "odl_vtn" "firstVtn" {
+  tenant_name  = "terraformVtn"
+  operation    = "ADD"
+  description  = "operation can be ADD or SET only"
+  idle_timeout = 56
+  hard_timeout = 58
+}
+  
+resource "odl_vbr" "firstVbr" {
+  tenant_name  = "${odl_vtn.firstVtn.tenant_name}"
+  bridge_name  = "terraformBridge"
+  operation    = "SET"
+  description  = "operation can be ADD or SET only"
+  age_interval = 577
 }`

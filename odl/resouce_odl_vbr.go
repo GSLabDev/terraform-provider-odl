@@ -3,6 +3,7 @@ package odl
 import (
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/hashicorp/terraform/helper/schema"
 )
@@ -52,7 +53,7 @@ func resourceVbrAdd(d *schema.ResourceData, meta interface{}) error {
 	var input map[string]string
 	input = make(map[string]string)
 
-	log.Println("[INFO] Creating Vbr with name " + bridgeName)
+	log.Println("[DEBUG] Creating Vbr with name " + bridgeName)
 	input["tenant-name"] = tenantName
 	input["update-mode"] = "UPDATE"
 	input["bridge-name"] = bridgeName
@@ -63,9 +64,9 @@ func resourceVbrAdd(d *schema.ResourceData, meta interface{}) error {
 		input["description"] = description.(string)
 	}
 	if idleTimeout, found := d.GetOk("age_interval"); found {
-		input["age-interval"] = string(idleTimeout.(int))
+		input["age-interval"] = strconv.Itoa(idleTimeout.(int))
 	}
-	log.Println("[INFO] All options collected for Vbr with name " + tenantName)
+	log.Println("[DEBUG] All options collected for Vbr with name " + tenantName)
 	body = make(map[string]interface{})
 	body["input"] = input
 	response, err := config.PostRequest("restconf/operations/vtn-vbridge:update-vbridge", body)
@@ -93,7 +94,7 @@ func resourceVbrRead(d *schema.ResourceData, meta interface{}) error {
 	tenantName := d.Get("tenant_name").(string)
 	bridgeName := d.Get("bridge_name").(string)
 
-	log.Println("[INFO] Read Bridge with name " + bridgeName)
+	log.Println("[DEBUG] Read Bridge with name " + bridgeName)
 	response, err := config.GetRequest("restconf/operational/vtn:vtns")
 	if err != nil {
 		log.Printf("[ERROR] POST Request failed")
@@ -105,7 +106,7 @@ func resourceVbrRead(d *schema.ResourceData, meta interface{}) error {
 		return fmt.Errorf("[ERROR] Vbr could not be read %v", err)
 	}
 	if !present {
-		log.Println("[INFO] Vbr with name " + bridgeName + "was not found")
+		log.Println("[DEBUG] Vbr with name " + bridgeName + "was not found")
 		d.SetId("")
 	}
 	return nil
@@ -127,8 +128,8 @@ func resourceVbrDelete(d *schema.ResourceData, meta interface{}) error {
 	body = make(map[string]interface{})
 	body["input"] = input
 
-	log.Println("[INFO] All options collected for Vbr with name " + bridgeName)
-	log.Println("[INFO] Preparing to destroy Vbr with name " + bridgeName)
+	log.Println("[DEBUG] All options collected for Vbr with name " + bridgeName)
+	log.Println("[DEBUG] Preparing to destroy Vbr with name " + bridgeName)
 
 	response, err := config.PostRequest("restconf/operations/vtn-vbridge:remove-vbridge", body)
 	if err != nil {

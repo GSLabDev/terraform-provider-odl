@@ -62,7 +62,7 @@ func resourceVInterfaceAdd(d *schema.ResourceData, meta interface{}) error {
 	var input map[string]string
 	input = make(map[string]string)
 
-	log.Println("[INFO] Creating Interface with name " + interfaceName)
+	log.Println("[DEBUG] Creating Interface with name " + interfaceName)
 	input["tenant-name"] = tenantName
 	input["update-mode"] = "UPDATE"
 	input["bridge-name"] = bridgeName
@@ -81,7 +81,7 @@ func resourceVInterfaceAdd(d *schema.ResourceData, meta interface{}) error {
 		input["enabled"] = strconv.FormatBool(enabled.(bool))
 	}
 
-	log.Println("[INFO] All options collected for interface with name " + interfaceName)
+	log.Println("[DEBUG] All options collected for interface with name " + interfaceName)
 	body = make(map[string]interface{})
 	body["input"] = input
 	response, err := config.PostRequest("restconf/operations/vtn-vinterface:update-vinterface", body)
@@ -110,7 +110,7 @@ func resourceVInterfaceRead(d *schema.ResourceData, meta interface{}) error {
 	bridgeName := d.Get("bridge_name").(string)
 	interfaceName := d.Get("interface_name").(string)
 
-	log.Println("[INFO] Read Interface with name " + interfaceName)
+	log.Println("[DEBUG] Read Interface with name " + interfaceName)
 	response, err := config.GetRequest("restconf/operational/vtn:vtns")
 	if err != nil {
 		log.Printf("[ERROR] POST Request failed")
@@ -122,7 +122,7 @@ func resourceVInterfaceRead(d *schema.ResourceData, meta interface{}) error {
 		return fmt.Errorf("[ERROR] Interface could not be read %v", err)
 	}
 	if !present {
-		log.Println("[INFO] Interface with name " + bridgeName + "was not found")
+		log.Println("[DEBUG] Interface with name " + bridgeName + "was not found")
 		d.SetId("")
 	}
 	return nil
@@ -151,8 +151,8 @@ func resourceVInterfaceDelete(d *schema.ResourceData, meta interface{}) error {
 	body = make(map[string]interface{})
 	body["input"] = input
 
-	log.Println("[INFO] All options collected for Interface with name " + interfaceName)
-	log.Println("[INFO] Preparing to destroy Interface with name " + interfaceName)
+	log.Println("[DEBUG] All options collected for Interface with name " + interfaceName)
+	log.Println("[DEBUG] Preparing to destroy Interface with name " + interfaceName)
 
 	response, err := config.PostRequest("restconf/operations/vtn-vinterface:remove-vinterface", body)
 	if err != nil {

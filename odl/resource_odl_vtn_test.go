@@ -10,50 +10,51 @@ import (
 )
 
 func TestAccVtn_Basic(t *testing.T) {
-	tenantName := "vtn2"
+	resourceName := "odl_vtn.vtn2"
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
 		Providers:    testAccProviders,
-		CheckDestroy: testAccCheckVtnDestroy,
+		CheckDestroy: testAccCheckVtnDestroy(resourceName),
 		Steps: []resource.TestStep{
 			resource.TestStep{
 				Config: testAccCheckVtnConfigBasic,
 				Check: resource.ComposeTestCheckFunc(
-					testAccCheckVtnExists("odl_vtn.vtn2"),
+					testAccCheckVtnExists(resourceName),
 					resource.TestCheckResourceAttr(
-						"odl_vtn.vtn2", "tenant_name", tenantName),
+						"odl_vtn.vtn2", "tenant_name", "terraformVtn"),
 				),
 			},
 		},
 	})
 }
 
-func testAccCheckVtnDestroy(s *terraform.State) error {
+func testAccCheckVtnDestroy(n string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[n]
 
-	rs, ok := s.RootModule().Resources["odl_vtn.vtn2"]
+		if !ok {
+			return fmt.Errorf("Not found: odl_vtn.vtn2")
+		}
 
-	if !ok {
-		return fmt.Errorf("Not found: odl_vtn.vtn2")
-	}
+		tenantName := rs.Primary.Attributes["tenant_name"]
+		config := testAccProvider.Meta().(*Config)
 
-	tenantName := rs.Primary.Attributes["tenant_name"]
-	config := testAccProvider.Meta().(*Config)
-
-	response, err := config.GetRequest("restconf/operational/vtn:vtns")
-	if err != nil {
-		log.Printf("[ERROR] POST Request failed")
-		return err
+		response, err := config.GetRequest("restconf/operational/vtn:vtns")
+		if err != nil {
+			log.Printf("[ERROR] POST Request failed")
+			return err
+		}
+		present, err := CheckResponseVtnExists(response, tenantName)
+		if err != nil {
+			log.Println("[ERROR] Vtn Read failed")
+			return fmt.Errorf("[ERROR] Vtn could not be read %v", err)
+		}
+		if present {
+			log.Println("[DEBUG] Vtn with name " + tenantName + " found")
+			return fmt.Errorf("[ERROR] Vtn with name " + tenantName + "was found")
+		}
+		return nil
 	}
-	present, err := CheckResponseVtnExists(response, tenantName)
-	if err != nil {
-		log.Println("[ERROR] Vtn Read failed")
-		return fmt.Errorf("[ERROR] Vtn could not be read %v", err)
-	}
-	if present {
-		log.Println("[INFO] Vtn with name " + tenantName + " found")
-		return fmt.Errorf("[ERROR] Vtn with name " + tenantName + "was found")
-	}
-	return nil
 }
 
 func testAccCheckVtnExists(n string) resource.TestCheckFunc {
@@ -81,7 +82,7 @@ func testAccCheckVtnExists(n string) resource.TestCheckFunc {
 			return fmt.Errorf("[ERROR] Vtn could not be read %v", err)
 		}
 		if !present {
-			log.Println("[INFO] Vtn with name " + tenantName + " found")
+			log.Println("[DEBUG] Vtn with name " + tenantName + " found")
 			return fmt.Errorf("[ERROR] Vtn with name " + tenantName + "was found")
 		}
 		return nil
@@ -89,6 +90,6 @@ func testAccCheckVtnExists(n string) resource.TestCheckFunc {
 }
 
 const testAccCheckVtnConfigBasic = `
-resource "odl_vtn" "vtn2"{
-     	tenant_name = "vtn2"
+resource "odl_vtn" "vtn2" {
+  tenant_name = "terraformVtn"
 }`

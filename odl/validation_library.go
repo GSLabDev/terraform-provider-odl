@@ -7,7 +7,7 @@ import (
 
 func validateOperation(v interface{}, k string) (warnings []string, errors []error) {
 	operation := v.(string)
-	log.Printf("[INFO] Validating operation %s", operation)
+	log.Printf("[DEBUG] Validating operation %s", operation)
 	if operation == "SET" || operation == "ADD" {
 		return nil, nil
 	}
