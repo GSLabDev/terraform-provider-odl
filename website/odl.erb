@@ -1,0 +1,31 @@
+<% wrap_layout :inner do %>
+    <% content_for :sidebar do %>
+      <div class="docs-sidebar hidden-print affix-top" role="complementary">
+        <ul class="nav docs-sidenav">
+          <li<%= sidebar_current("docs-home") %>>
+            <a href="/docs/providers/index.html">All Providers</a>
+          </li>
+  
+          <li<%= sidebar_current("docs-odl-index") %>>
+            <a href="/docs/providers/odl/index.html">Open Daylight</a>
+          </li>
+  
+          <li<%= sidebar_current("docs-odl-resource-inventory") %>>
+            <a href="#">Virtual Tenant Network</a>
+            <ul class="nav nav-visible">
+              <li<%= sidebar_current("docs-odl-virtual-tenant-interface") %>>
+                <a href="/docs/providers/odl/r/virtual_tenant_network.html">odl_virtual_tenant_network</a>
+              </li>
+              <li<%= sidebar_current("docs-odl-virtual-bridge") %>>
+                <a href="/docs/providers/odl/r/virtual_bridge.html">odl_virtual_bridge</a>
+              </li>
+              <li<%= sidebar_current("docs-odl-virtual-interface") %>>
+                <a href="/docs/providers/odl/r/virtual_interface.html">odl_virtual_interface</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+    <%= yield %>
+  <% end %>

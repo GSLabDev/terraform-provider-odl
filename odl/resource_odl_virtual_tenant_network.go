@@ -8,11 +8,11 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 )
 
-func resourceOdlVbr() *schema.Resource {
+func resourceOdlVirtualTenantNetwork() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceVbrAdd,
-		Read:   resourceVbrRead,
-		Delete: resourceVbrDelete,
+		Create: resourceVtnAdd,
+		Read:   resourceVtnRead,
+		Delete: resourceVtnDelete,
 		Schema: map[string]*schema.Schema{
 			"tenant_name": &schema.Schema{
 				Type:     schema.TypeString,
@@ -31,107 +31,103 @@ func resourceOdlVbr() *schema.Resource {
 				Optional: true,
 				ForceNew: true,
 			},
-			"age_interval": &schema.Schema{
+			"idle_timeout": &schema.Schema{
 				Type:     schema.TypeInt,
 				Optional: true,
 				ForceNew: true,
 			},
-			"bridge_name": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+			"hard_timeout": &schema.Schema{
+				Type:     schema.TypeInt,
+				Optional: true,
 				ForceNew: true,
 			},
 		},
 	}
 }
-func resourceVbrAdd(d *schema.ResourceData, meta interface{}) error {
+func resourceVtnAdd(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*Config)
 	tenantName := d.Get("tenant_name").(string)
-	bridgeName := d.Get("bridge_name").(string)
 
 	var body map[string]interface{}
 	var input map[string]string
 	input = make(map[string]string)
-
-	log.Println("[DEBUG] Creating Vbr with name " + bridgeName)
+	log.Println("[DEBUG] Creating Vtn with name " + tenantName)
 	input["tenant-name"] = tenantName
 	input["update-mode"] = "UPDATE"
-	input["bridge-name"] = bridgeName
 	if operation, found := d.GetOk("operation"); found {
 		input["operation"] = operation.(string)
 	}
 	if description, found := d.GetOk("description"); found {
 		input["description"] = description.(string)
 	}
-	if idleTimeout, found := d.GetOk("age_interval"); found {
-		input["age-interval"] = strconv.Itoa(idleTimeout.(int))
+	if idleTimeout, found := d.GetOk("idle_timeout"); found {
+		input["idle-timeout"] = strconv.Itoa(idleTimeout.(int))
 	}
-	log.Println("[DEBUG] All options collected for Vbr with name " + tenantName)
+	if hardTimeout, found := d.GetOk("hard_timeout"); found {
+		input["hard-timeout"] = strconv.Itoa(hardTimeout.(int))
+	}
+	log.Println("[DEBUG] All options collected for Vtn with name " + tenantName)
 	body = make(map[string]interface{})
 	body["input"] = input
-	response, err := config.PostRequest("restconf/operations/vtn-vbridge:update-vbridge", body)
+	response, err := config.PostRequest("restconf/operations/vtn:update-vtn", body)
 	if err != nil {
 		log.Printf("[ERROR] POST Request failed")
 		return err
 	}
 	isCreated, output, errorOutput, err := Status(response)
 	if isCreated {
-		d.SetId(tenantName + bridgeName + output.Output.Status)
+		d.SetId(tenantName + output.Output.Status)
 	} else {
 		if errorOutput != nil {
-			log.Printf("[ERROR] While creating vbr %s", errorOutput.Errors.Error[0].Message)
-			return fmt.Errorf("[ERROR] While creating vbr %s", errorOutput.Errors.Error[0].Message)
+			log.Printf("[ERROR] While creating vtn %s", errorOutput.Errors.Error[0].Message)
+			return fmt.Errorf("[ERROR] While creating vtn %s", errorOutput.Errors.Error[0].Message)
 		}
 		if err != nil {
-			return fmt.Errorf("[ERROR] Whlie creating vbr %s", err.Error())
+			return fmt.Errorf("[ERROR] Whlie creating vtn %s", err.Error())
 		}
 	}
 
 	return nil
 }
-func resourceVbrRead(d *schema.ResourceData, meta interface{}) error {
+func resourceVtnRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*Config)
 	tenantName := d.Get("tenant_name").(string)
-	bridgeName := d.Get("bridge_name").(string)
-
-	log.Println("[DEBUG] Read Bridge with name " + bridgeName)
+	log.Println("[DEBUG] Read Vtn with name " + tenantName)
 	response, err := config.GetRequest("restconf/operational/vtn:vtns")
 	if err != nil {
 		log.Printf("[ERROR] POST Request failed")
 		return err
 	}
-	present, err := CheckResponseVbrExists(response, tenantName, bridgeName)
+	present, err := CheckResponseVirtualTenantNetworkExists(response, tenantName)
 	if err != nil {
-		log.Println("[ERROR] Vbr Read failed")
-		return fmt.Errorf("[ERROR] Vbr could not be read %v", err)
+		log.Println("[ERROR] Vtn Read failed")
+		return fmt.Errorf("[ERROR] Vtn could not be read %v", err)
 	}
 	if !present {
-		log.Println("[DEBUG] Vbr with name " + bridgeName + "was not found")
+		log.Println("[DEBUG] Vtn with name " + tenantName + "was not found")
 		d.SetId("")
 	}
 	return nil
 }
-func resourceVbrDelete(d *schema.ResourceData, meta interface{}) error {
-	err := resourceVbrRead(d, meta)
+func resourceVtnDelete(d *schema.ResourceData, meta interface{}) error {
+	err := resourceVtnRead(d, meta)
 	if d.Id() == "" {
-		return fmt.Errorf("[ERROR] vbr does not exists")
+		return fmt.Errorf("[ERROR] vtn does not exists")
 	}
 	config := meta.(*Config)
 	tenantName := d.Get("tenant_name").(string)
-	bridgeName := d.Get("bridge_name").(string)
+
 	var body map[string]interface{}
 	var input map[string]string
 	input = make(map[string]string)
 
 	input["tenant-name"] = tenantName
-	input["bridge-name"] = bridgeName
 	body = make(map[string]interface{})
 	body["input"] = input
+	log.Println("[DEBUG] All options collected for Vtn with name " + tenantName)
+	log.Println("[DEBUG] Preparing to destroy Vtn with name " + tenantName)
 
-	log.Println("[DEBUG] All options collected for Vbr with name " + bridgeName)
-	log.Println("[DEBUG] Preparing to destroy Vbr with name " + bridgeName)
-
-	response, err := config.PostRequest("restconf/operations/vtn-vbridge:remove-vbridge", body)
+	response, err := config.PostRequest("restconf/operations/vtn:remove-vtn", body)
 	if err != nil {
 		log.Printf("[ERROR] POST Request failed")
 		return err
@@ -141,11 +137,11 @@ func resourceVbrDelete(d *schema.ResourceData, meta interface{}) error {
 		d.SetId("")
 	} else {
 		if errorOutput != nil {
-			log.Printf("[ERROR] While destroying vbr %s", errorOutput.Errors.Error[0].Message)
-			return fmt.Errorf("[ERROR] While creating vbr %s", errorOutput.Errors.Error[0].Message)
+			log.Printf("[ERROR] While destroying vtn %s", errorOutput.Errors.Error[0].Message)
+			return fmt.Errorf("[ERROR] While creating vtn %s", errorOutput.Errors.Error[0].Message)
 		}
 		if err != nil {
-			return fmt.Errorf("[ERROR] Whlie destroying vbr %s", err.Error())
+			return fmt.Errorf("[ERROR] Whlie destroying vtn %s", err.Error())
 		}
 	}
 

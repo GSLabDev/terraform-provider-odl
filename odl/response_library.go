@@ -88,8 +88,8 @@ func Status(response *http.Response) (bool, *OutputCase, *ErrorCase, error) {
 	return false, nil, nil, nil
 }
 
-//CheckResponseVtnExists ... checks response if vtn exists
-func CheckResponseVtnExists(response *http.Response, name string) (bool, error) {
+//CheckResponseVirtualTenantNetworkExists ... checks response if vtn exists
+func CheckResponseVirtualTenantNetworkExists(response *http.Response, name string) (bool, error) {
 	respString, err := getResponseAsString(response)
 	data := &VtnList{}
 	err = json.Unmarshal([]byte(respString), data)
@@ -106,8 +106,8 @@ func CheckResponseVtnExists(response *http.Response, name string) (bool, error) 
 	return false, nil
 }
 
-//CheckResponseVbrExists ... checks response if vtn exists
-func CheckResponseVbrExists(response *http.Response, tenantName, bridgeName string) (bool, error) {
+//CheckResponseVirtualBridgeExists ... checks response if vtn exists
+func CheckResponseVirtualBridgeExists(response *http.Response, tenantName, bridgeName string) (bool, error) {
 	respString, err := getResponseAsString(response)
 	data := &VtnList{}
 	err = json.Unmarshal([]byte(respString), data)
@@ -131,8 +131,8 @@ func CheckResponseVbrExists(response *http.Response, tenantName, bridgeName stri
 	return false, nil
 }
 
-//CheckResponseVInterfaceExists ... checks response if vInterface exists
-func CheckResponseVInterfaceExists(response *http.Response, tenantName, bridgeName, interfaceName string) (bool, error) {
+//CheckResponseVirtualInterfaceExists ... checks response if vInterface exists
+func CheckResponseVirtualInterfaceExists(response *http.Response, tenantName, bridgeName, interfaceName string) (bool, error) {
 	respString, err := getResponseAsString(response)
 	data := &VtnList{}
 	err = json.Unmarshal([]byte(respString), data)

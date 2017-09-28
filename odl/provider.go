@@ -40,9 +40,9 @@ func Provider() terraform.ResourceProvider {
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
-			"odl_vtn":        resourceOdlVtn(),
-			"odl_vbr":        resourceOdlVbr(),
-			"odl_vinterface": resourceOdlVInterface(),
+			"odl_virtual_tenant_network": resourceOdlVirtualTenantNetwork(),
+			"odl_virtual_bridge":         resourceOdlVirtualBridge(),
+			"odl_virtual_interface":      resourceOdlVirtualInterface(),
 		},
 
 		ConfigureFunc: providerConfigure,

@@ -8,11 +8,11 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 )
 
-func resourceOdlVInterface() *schema.Resource {
+func resourceOdlVirtualInterface() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceVInterfaceAdd,
-		Read:   resourceVInterfaceRead,
-		Delete: resourceVInterfaceDelete,
+		Create: resourceVirtualInterfaceAdd,
+		Read:   resourceVirtualInterfaceRead,
+		Delete: resourceVirtualInterfaceDelete,
 		Schema: map[string]*schema.Schema{
 			"tenant_name": &schema.Schema{
 				Type:     schema.TypeString,
@@ -53,7 +53,7 @@ func resourceOdlVInterface() *schema.Resource {
 		},
 	}
 }
-func resourceVInterfaceAdd(d *schema.ResourceData, meta interface{}) error {
+func resourceVirtualInterfaceAdd(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*Config)
 	tenantName := d.Get("tenant_name").(string)
 	bridgeName := d.Get("bridge_name").(string)
@@ -104,7 +104,7 @@ func resourceVInterfaceAdd(d *schema.ResourceData, meta interface{}) error {
 
 	return nil
 }
-func resourceVInterfaceRead(d *schema.ResourceData, meta interface{}) error {
+func resourceVirtualInterfaceRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*Config)
 	tenantName := d.Get("tenant_name").(string)
 	bridgeName := d.Get("bridge_name").(string)
@@ -116,7 +116,7 @@ func resourceVInterfaceRead(d *schema.ResourceData, meta interface{}) error {
 		log.Printf("[ERROR] POST Request failed")
 		return err
 	}
-	present, err := CheckResponseVInterfaceExists(response, tenantName, bridgeName, interfaceName)
+	present, err := CheckResponseVirtualInterfaceExists(response, tenantName, bridgeName, interfaceName)
 	if err != nil {
 		log.Println("[ERROR] Interface Read failed")
 		return fmt.Errorf("[ERROR] Interface could not be read %v", err)
@@ -127,8 +127,8 @@ func resourceVInterfaceRead(d *schema.ResourceData, meta interface{}) error {
 	}
 	return nil
 }
-func resourceVInterfaceDelete(d *schema.ResourceData, meta interface{}) error {
-	err := resourceVInterfaceRead(d, meta)
+func resourceVirtualInterfaceDelete(d *schema.ResourceData, meta interface{}) error {
+	err := resourceVirtualInterfaceRead(d, meta)
 	if d.Id() == "" {
 		return fmt.Errorf("[ERROR] Interface does not exists")
 	}

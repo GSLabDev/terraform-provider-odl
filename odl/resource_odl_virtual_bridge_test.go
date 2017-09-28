@@ -9,19 +9,19 @@ import (
 	"github.com/hashicorp/terraform/terraform"
 )
 
-func TestAccVbr_Basic(t *testing.T) {
+func TestAccOdlVirtualBridge_Basic(t *testing.T) {
 	tenantName := "terraformVtn"
 	bridgeName := "terraformBridge"
-	resourceName := "odl_vbr.firstVbr"
+	resourceName := "odl_virtual_bridge.firstVirtualBridge"
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
 		Providers:    testAccProviders,
-		CheckDestroy: testAccCheckVbrDestroy(resourceName),
+		CheckDestroy: testAccCheckVirtualBridgeDestroy(resourceName),
 		Steps: []resource.TestStep{
 			resource.TestStep{
-				Config: testAccCheckVbrConfigBasic,
+				Config: testAccCheckVirtualBridgeConfigBasic,
 				Check: resource.ComposeTestCheckFunc(
-					testAccCheckVbrExists(resourceName),
+					testAccCheckVirtualBridgeExists(resourceName),
 					resource.TestCheckResourceAttr(
 						resourceName, "tenant_name", tenantName),
 					resource.TestCheckResourceAttr(
@@ -32,7 +32,7 @@ func TestAccVbr_Basic(t *testing.T) {
 	})
 }
 
-func testAccCheckVbrDestroy(n string) resource.TestCheckFunc {
+func testAccCheckVirtualBridgeDestroy(n string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
 		rs, ok := s.RootModule().Resources[n]
 
@@ -49,20 +49,20 @@ func testAccCheckVbrDestroy(n string) resource.TestCheckFunc {
 			log.Printf("[ERROR] POST Request failed")
 			return err
 		}
-		present, err := CheckResponseVbrExists(response, tenantName, bridgeName)
+		present, err := CheckResponseVirtualBridgeExists(response, tenantName, bridgeName)
 		if err != nil {
-			log.Println("[ERROR] Vbr Read failed")
-			return fmt.Errorf("[ERROR] Vbr could not be read %v", err)
+			log.Println("[ERROR] Virtual Bridge Read failed")
+			return fmt.Errorf("[ERROR] Virtual Bridge could not be read %v", err)
 		}
 		if present {
-			log.Println("[DEBUG] Vbr with name " + bridgeName + " found")
-			return fmt.Errorf("[ERROR] Vbr with name " + bridgeName + "was found")
+			log.Println("[DEBUG] Virtual Bridge with name " + bridgeName + " found")
+			return fmt.Errorf("[ERROR] Virtual Bridge with name " + bridgeName + "was found")
 		}
 		return nil
 	}
 }
 
-func testAccCheckVbrExists(n string) resource.TestCheckFunc {
+func testAccCheckVirtualBridgeExists(n string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
 		rs, ok := s.RootModule().Resources[n]
 
@@ -71,7 +71,7 @@ func testAccCheckVbrExists(n string) resource.TestCheckFunc {
 		}
 
 		if rs.Primary.ID == "" {
-			return fmt.Errorf("No Vbr ID is set")
+			return fmt.Errorf("No Virtual Bridge ID is set")
 		}
 		tenantName := rs.Primary.Attributes["tenant_name"]
 		bridgeName := rs.Primary.Attributes["bridge_name"]
@@ -83,21 +83,21 @@ func testAccCheckVbrExists(n string) resource.TestCheckFunc {
 			log.Printf("[ERROR] POST Request failed")
 			return err
 		}
-		present, err := CheckResponseVbrExists(response, tenantName, bridgeName)
+		present, err := CheckResponseVirtualBridgeExists(response, tenantName, bridgeName)
 		if err != nil {
-			log.Println("[ERROR] Vbr Read failed")
-			return fmt.Errorf("[ERROR] Vbr could not be read %v", err)
+			log.Println("[ERROR] Virtual Bridge Read failed")
+			return fmt.Errorf("[ERROR] Virtual Bridge could not be read %v", err)
 		}
 		if !present {
-			log.Println("[DEBUG] Vbr with name " + bridgeName + "was not found")
-			return fmt.Errorf("[ERROR] Vbr with name " + bridgeName + "was not found")
+			log.Println("[DEBUG] Virtual Bridge with name " + bridgeName + "was not found")
+			return fmt.Errorf("[ERROR] Virtual Bridge with name " + bridgeName + "was not found")
 		}
 		return nil
 	}
 }
 
-const testAccCheckVbrConfigBasic = `
-resource "odl_vtn" "firstVtn" {
+const testAccCheckVirtualBridgeConfigBasic = `
+resource "odl_virtual_tenant_network" "firstVtn" {
   tenant_name  = "terraformVtn"
   operation    = "ADD"
   description  = "operation can be ADD or SET only"
@@ -105,8 +105,8 @@ resource "odl_vtn" "firstVtn" {
   hard_timeout = 58
 }
   
-resource "odl_vbr" "firstVbr" {
-  tenant_name  = "${odl_vtn.firstVtn.tenant_name}"
+resource "odl_virtual_bridge" "firstVirtualBridge" {
+  tenant_name  = "${odl_virtual_tenant_network.firstVtn.tenant_name}"
   bridge_name  = "terraformBridge"
   operation    = "SET"
   description  = "operation can be ADD or SET only"
