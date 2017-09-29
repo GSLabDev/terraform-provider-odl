@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/GSLabDev/terraform-provider-odl/odl"
 	"github.com/hashicorp/terraform/plugin"
-	"github.com/idmsubs/terraform-provider-odl/odl"
 )
 
 func main() {
