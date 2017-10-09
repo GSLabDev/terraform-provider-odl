@@ -62,7 +62,7 @@ resource "odl_virtual_interface" "firstInterface" {
 
 ## Argument Reference
 
-The following arguments are used to configure the Active Directory Provider:
+The following arguments are used to configure the Open Daylight Provider:
 
 * `user_name` - (Required) This is the username for Open Daylight operations. Can also
   be specified with the `ODL_SERVER_USER` environment variable.
@@ -75,7 +75,7 @@ The following arguments are used to configure the Active Directory Provider:
 
 ## Acceptance Tests
 
-The Active Directory provider's acceptance tests require the above provider
+The Open Daylight provider's acceptance tests require the above provider
 configuration fields to be set using the documented environment variables.
 
 Once all these variables are in place, the tests can be run like this:
